@@ -2,13 +2,11 @@
 <!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
 
 <beans>
-	<!-- This is filtered by Maven at build time, so that module name is single sourced. -->
-    <import resource="classpath:alfresco/module/${project.artifactId}/context/service-context.xml" />
-    <bean id="emaildocuments_resources" class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
+       <bean id="emaildocuments_resources" class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
         <property name="resourceBundles">
             <list>
                 <value>alfresco.module.shareemaildocuments.messages.language</value>
             </list>
         </property>
-    </bean>       
+    </bean>     
 </beans>
