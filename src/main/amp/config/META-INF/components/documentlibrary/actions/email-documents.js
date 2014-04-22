@@ -21,11 +21,11 @@
             {
                 actionName: "onActionSendDocumentsViaEmail",
                 fn: function onActionSendDocumentsViaEmail(file) {
-                    var dlg = new Alfresco.module.SimpleDialog(this.id+
-                            "-email-documents-"+
+                    var dlg = new Alfresco.module.SimpleDialog(this.id +
+                            "-email-documents-" +
                             Alfresco.util.generateDomId());
                     var templateUrl = YAHOO.lang.substitute(
-                            Alfresco.constants.URL_SERVICECONTEXT + 
+                            Alfresco.constants.URL_SERVICECONTEXT +
                             "components/form?itemKind={itemKind}&itemId={itemId}&destination={destination}&mode={mode}&submitType={submitType}&showCancelButton=true",
                             {
                                 itemKind: "action",
@@ -49,17 +49,28 @@
                                     }
                                 },
                                 onTemplateLoaded: {
-                                    fn: function templateLoaded(response){
+                                    fn: function templateLoaded(response) {
                                         Alfresco.util.PopupManager.displayMessage(reponse);
                                     }
                                 },
-                                doBeforeDialogShow:{
-                                    fn: function doBeforeDialogShow(form,dialog){
-                                        var tmp = dialog.id+"_prop_to";
-                                        YAHOO.util.Dom.get(tmp).value="test";
+                                doBeforeDialogShow: {
+                                    fn: function doBeforeDialogShow(form, dialog) {
+                                        try {
+                                            if (file.jsNode.hasAspect("jb:emailTemplate")) {
+                                                var from = dialog.id + "_prop_from";
+                                                YAHOO.util.Dom.get(from).value = file.jsNode.properties["jb:from"];
+                                                var subject = dialog.id + "_prop_subject";
+                                                YAHOO.util.Dom.get(subject).value = file.jsNode.properties["jb:subject"];
+                                                var body = dialog.id + "_prop_body";
+                                                YAHOO.util.Dom.get(body).value = file.jsNode.properties["jb:body"];
+                                                var convert = dialog.id + "_prop_convert";
+                                                YAHOO.util.Dom.get(body).value = file.jsNode.properties["jb:convertToPDF"];
+                                            }
+                                        } catch (ex) {
+                                            console.log("error retrieving email template..."+ex.message);
+                                        }
                                     }
                                 },
-
                             });
                     dlg.show();
                 }

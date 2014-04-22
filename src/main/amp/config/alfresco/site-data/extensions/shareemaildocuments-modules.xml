@@ -21,15 +21,20 @@
                                 <show id="to"/>
                                 <show id="from" />
                                 <show id="subject"/>
-                                <show id="body_text"/>
+                                <show id="body"/>
+                                <show id="convert"/>
                             </field-visibility>
                             <appearance>
                                 <field id="to" label-id="email-documents.field.to"/>
                                 <field id="from" label-id="email-documents.field.from"/>
                                 <field id="subject" label-id="email-documents.field.subject"/>
-                                <field id="body_text" label-id="email-documents.field.body_text">
+                                <field id="body" label-id="email-documents.field.body">
                                     <control
                                         template="/org/alfresco/components/form/controls/textarea.ftl" />
+                                </field>
+                                <field id="convert" label-id="email-documents.field.body">
+                                    <control
+                                        template="/org/alfresco/components/form/controls/checkbox.ftl" />
                                 </field>
                             </appearance>
                         </form>
