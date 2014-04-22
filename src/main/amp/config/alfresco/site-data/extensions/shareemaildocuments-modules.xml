@@ -32,7 +32,7 @@
                                     <control
                                         template="/org/alfresco/components/form/controls/textarea.ftl" />
                                 </field>
-                                <field id="convert" label-id="email-documents.field.body">
+                                <field id="convert" label-id="email-documents.field.convert">
                                     <control
                                         template="/org/alfresco/components/form/controls/checkbox.ftl" />
                                 </field>
@@ -93,6 +93,7 @@
                                 <show id="jb:to" />
                                 <show id="jb:subject" />
                                 <show id="jb:body" />
+                                <show id="jb:convert" />
                             </field-visibility>
                             <appearance>
                                 <field id="jb:from" label-id="jb_from"/>
@@ -101,6 +102,10 @@
                                 <field id="jb:body" label-id="jb_body">
                                     <control template="/org/alfresco/components/form/controls/textarea.ftl" />
                                 </field>
+                                <field id="convert" label-id="email-documents.field.convert">
+                                    <control
+                                        template="/org/alfresco/components/form/controls/checkbox.ftl" />
+                                </field>                                
                             </appearance>
                         </form>
                     </forms>

@@ -63,8 +63,8 @@
                                                 YAHOO.util.Dom.get(subject).value = file.jsNode.properties["jb:subject"];
                                                 var body = dialog.id + "_prop_body";
                                                 YAHOO.util.Dom.get(body).value = file.jsNode.properties["jb:body"];
-                                                var convert = dialog.id + "_prop_convert";
-                                                YAHOO.util.Dom.get(body).value = file.jsNode.properties["jb:convertToPDF"];
+                                                var convert = dialog.id + "_prop_convert-entry";
+                                                YAHOO.util.Dom.get(convert).checked = file.jsNode.properties["jb:convert"];
                                             }
                                         } catch (ex) {
                                             console.log("error retrieving email template..."+ex.message);
