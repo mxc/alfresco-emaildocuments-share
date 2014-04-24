@@ -14,6 +14,34 @@
             </customizations>
                         
             <configurations>
+
+                <config evaluator="string-compare" condition="emailDocumentsAction">
+                     <forms>
+                        <form>
+                            <field-visibility>
+                                <show id="to"/>
+                                <show id="from" />
+                                <show id="subject"/>
+                                <show id="body"/>
+                                <show id="convert"/>
+                            </field-visibility>
+                            <appearance>
+                                <field id="to" label-id="email-documents.field.to"/>
+                                <field id="from" label-id="email-documents.field.from"/>
+                                <field id="subject" label-id="email-documents.field.subject"/>
+                                <field id="body" label-id="email-documents.field.body">
+                                    <control
+                                        template="/org/alfresco/components/form/controls/textarea.ftl" />
+                                </field>
+                                <field id="convert" label-id="email-documents.field.convert">
+                                    <control
+                                        template="/org/alfresco/components/form/controls/checkbox.ftl" />
+                                </field>
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                
                 <config evaluator="string-compare" condition="emailDocumentsWithHistoryAction">
                      <forms>
                         <form>
@@ -44,10 +72,19 @@
                 <!-- Custom DocLibActions config section -->
                 <config evaluator="string-compare" condition="DocLibActions">
                     <actions>
+                        <action id="email-documents-history" type="javascript" label="actions.email-documents-history" icon="cyberconnect">
+                            <param name="function">onActionSendDocumentsViaEmailWithHistory</param>
+                            <param name="itemKind">action</param>
+                            <param name="itemId">emailDocumentsWithHistoryAction</param>
+                            <param name="destination">{node.nodeRef}</param>
+                            <param name="mode">create</param>
+                            <param name="successMessage">message.email-documents.success</param>
+                            <param name="failureMessage">message.email-documents.failure</param>
+                        </action>
                         <action id="email-documents" type="javascript" label="actions.email-documents" icon="cyberconnect">
                             <param name="function">onActionSendDocumentsViaEmail</param>
                             <param name="itemKind">action</param>
-                            <param name="itemId">emailDocumentsWithHistoryAction</param>
+                            <param name="itemId">emailDocumentsAction</param>
                             <param name="destination">{node.nodeRef}</param>
                             <param name="mode">create</param>
                             <param name="successMessage">message.email-documents.success</param>
@@ -57,15 +94,19 @@
                     <actionGroups>
                         <actionGroup id="document-browse">
                             <action index="300" id="email-documents" />
+                            <action index="300" id="email-documents-history" />
                         </actionGroup>
                         <actionGroup id="document-details">
                             <action index="300" id="email-documents" />
+                            <action index="300" id="email-documents-history" />
                         </actionGroup>
                         <actionGroup id="folder-browse">
                             <action index="300" id="email-documents" />
+                            <action index="300" id="email-documents-history" />
                         </actionGroup>
                         <actionGroup id="folder-details">
                             <action index="300" id="email-documents" />
+                            <action index="300" id="email-documents-history" />
                         </actionGroup>
                     </actionGroups>
                 </config> 
