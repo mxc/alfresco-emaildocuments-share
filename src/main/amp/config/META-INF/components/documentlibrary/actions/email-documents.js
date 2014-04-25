@@ -20,7 +20,7 @@
     YAHOO.Bubbling.fire("registerAction",
             {
                 actionName: "onActionSendDocumentsViaEmailWithHistory",
-                fn: function onActionSendDocumentsViaEmailWithHistory(file) {
+                fn: function onActionSendDocumentsViaEmailWithHistory(node) {
                     var dlg = new Alfresco.module.SimpleDialog(this.id +
                             "-email-documents-history" +
                             Alfresco.util.generateDomId());
@@ -33,10 +33,10 @@
                                 mode: "create",
                                 submitType: "json",
                                 showCancelButton: "true",
-                                destination: file.nodeRef
+                                destination: node.nodeRef
                             });
 
-                    addOptions(dlg, file);
+                    addOptions(dlg, node);
                     //dlg.options.actionUrl = Alfresco.constants.PROXY_URI + "emailDocumentsWithHistoryAction?site=" + page.url.templateArgs.site;
                     dlg.options.templateUrl = templateUrl;
                     dlg.show();
@@ -46,7 +46,7 @@
     YAHOO.Bubbling.fire("registerAction",
             {
                 actionName: "onActionSendDocumentsViaEmail",
-                fn: function onActionSendDocumentsViaEmail(file) {
+                fn: function onActionSendDocumentsViaEmail(node) {
                     var dlg = new Alfresco.module.SimpleDialog(this.id +
                             "-email-documents" +
                             Alfresco.util.generateDomId());
@@ -60,28 +60,28 @@
                                 mode: "create",
                                 submitType: "json",
                                 showCancelButton: "true",
-                                destination: file.nodeRef
+                                destination: node.nodeRef
                             });
 
-                    addOptions(dlg, file);
+                    addOptions(dlg, node);
                     dlg.options.templateUrl = templateUrl;
                     dlg.show();
                 }
             });
 
-    function addOptions(dlg, file) {
+    function addOptions(dlg, node) {
         dlg.setOptions(
                 {
                     width: "50em",
                     method: Alfresco.util.Ajax.POST,
                     onSuccess: {
                         fn: function success(response) {
-                            Alfresco.util.PopupManager.displayMessage({text: this.msg("message.email-documents.success")});
+                            Alfresco.util.PopupManager.displayMessage({text: dlg.msg("message.email-documents.success")});
                         }
                     },
                     onFailure: {
                         fn: function fail(response) {
-                            Alfresco.util.PopupManager.displayMessage({text: this.msg("message.email-documents.failure")});
+                            Alfresco.util.PopupManager.displayMessage({text: dlg.msg("message.email-documents.failure")});
                         }
                     },
                     onTemplateLoaded: {
@@ -92,18 +92,27 @@
                     doBeforeDialogShow: {
                         fn: function doBeforeDialogShow(form, dialog) {
                             try {
-                                if (file.jsNode.hasAspect("jb:emailTemplate")) {
+                                if (node.jsNode.hasAspect("jb:emailTemplate")) {
                                     var from = dialog.id + "_prop_from";
-                                    YAHOO.util.Dom.get(from).value = file.jsNode.properties["jb:from"];
+                                    YAHOO.util.Dom.get(from).value = node.jsNode.properties["jb:from"];
                                     var subject = dialog.id + "_prop_subject";
-                                    YAHOO.util.Dom.get(subject).value = file.jsNode.properties["jb:subject"];
+                                    YAHOO.util.Dom.get(subject).value = node.jsNode.properties["jb:subject"];
                                     var body = dialog.id + "_prop_body";
-                                    YAHOO.util.Dom.get(body).value = file.jsNode.properties["jb:body"];
+                                    YAHOO.util.Dom.get(body).value = node.jsNode.properties["jb:body"];
                                     var convert = dialog.id + "_prop_convert-entry";
-                                    YAHOO.util.Dom.get(convert).checked = file.jsNode.properties["jb:convert"];
+                                    YAHOO.util.Dom.get(convert).checked = node.jsNode.properties["jb:convert"];
                                 } else {
                                     var convert = dialog.id + "_prop_convert-entry";
                                     YAHOO.util.Dom.get(convert).checked = true;
+                                }
+                                var formElm = YAHOO.util.Dom.get(dialog.id + "-form-fields");
+                                var formFields = formElm.children[0];
+                                for (var i = 0; i < formFields.childElementCount; i++) {
+                                    var elm = formFields.children[i];
+                                    if (elm.name === "prop_site") {
+                                        elm.value = Alfresco.constants.SITE;
+                                        break;
+                                    }
                                 }
                                 Alfresco.util.populateHTML([dialog.id + "-form-submit-button", this.msg("message.email-documents.button.send")],
                                         [dialog.id + "-form-cancel-button", this.msg("message.email-documents.button.cancel")]);

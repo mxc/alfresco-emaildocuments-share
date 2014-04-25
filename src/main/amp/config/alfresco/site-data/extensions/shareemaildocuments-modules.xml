@@ -51,6 +51,7 @@
                                 <show id="subject"/>
                                 <show id="body"/>
                                 <show id="convert"/>
+                                <show id="site"/>
                             </field-visibility>
                             <appearance>
                                 <field id="to" label-id="email-documents.field.to"/>
@@ -63,6 +64,12 @@
                                 <field id="convert" label-id="email-documents.field.convert">
                                     <control
                                         template="/org/alfresco/components/form/controls/checkbox.ftl" />
+                                </field>
+                                <field id="site">
+                                    <control 
+                                        template="/org/alfresco/components/form/controls/hidden.ftl">
+                                        <control-param name="contextProperty">site</control-param>
+                                    </control>
                                 </field>
                             </appearance>
                         </form>
@@ -151,6 +158,40 @@
                         </form>
                     </forms>
                 </config>
+                
+                <config evaluator="model-type" condition="jb:emailHistoryList">
+                    <forms>
+                        <form>
+                            <field-visibility>
+                                <show id="jb:from" />				
+                                <show id="jb:to" />				
+                                <show id="jb:subject" />
+                                <show id="jb:attachment" />
+                                <show id="jb:dateSent" />
+                                <show id="jb:body" />
+                            </field-visibility>
+                            <appearance>
+                                <field id="jb:from" label-id="jb_from"/>
+                                <field id="jb:to" label-id="jb_to"/>
+                                <field id="jb:subject" label-id="jb_subject"/>
+                                <field id="jb:attachment" label-id="jb_attachment"/>
+                                <field id="jb:dateSent" label-id="jb_dateSent"/>
+                                <field id="jb:body" label-id="jb_body">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl" />
+                                </field>
+                            </appearance>
+                        </form>
+                        <form id="datagrid">
+                            <field-visibility>
+                                <show id="jb:from" />				
+                                <show id="jb:to" />				
+                                <show id="jb:subject" />
+                                <show id="jb:attachment" />
+                                <show id="jb:dateSent" />
+                            </field-visibility>
+                        </form>
+                    </forms>
+                </config>                
             </configurations>
         </module>
     </modules>
