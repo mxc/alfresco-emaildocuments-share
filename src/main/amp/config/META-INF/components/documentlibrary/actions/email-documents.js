@@ -32,12 +32,12 @@
                                 itemId: "emailDocumentsWithHistoryAction",
                                 mode: "create",
                                 submitType: "json",
-                                showCancelButton: true,
-                                htmlid: this.parentId,
+                                showCancelButton: "true",
+                                destination: file.nodeRef
                             });
 
                     addOptions(dlg, file);
-                    dlg.options.actionUrl = Alfresco.constants.PROXY_URI + "emailDocumentsWithHistoryAction?site=" + page.url.templateArgs.site;
+                    //dlg.options.actionUrl = Alfresco.constants.PROXY_URI + "emailDocumentsWithHistoryAction?site=" + page.url.templateArgs.site;
                     dlg.options.templateUrl = templateUrl;
                     dlg.show();
                 }
@@ -52,15 +52,15 @@
                             Alfresco.util.generateDomId());
                     var templateUrl = YAHOO.lang.substitute(
                             Alfresco.constants.URL_SERVICECONTEXT +
-                            "components/form?itemKind={itemKind}&itemId={itemId}&destination={destination}&mode={mode}&submitType={submitType}&"+
-                            "showCancelButton={showCancelButton}&htmlid={htmlid}",
+                            "components/form?itemKind={itemKind}&itemId={itemId}&destination={destination}&mode={mode}&submitType={submitType}&" +
+                            "showCancelButton={showCancelButton}",
                             {
                                 itemKind: "action",
                                 itemId: "emailDocumentsAction",
                                 mode: "create",
                                 submitType: "json",
-                                showCancelButton: true,
-                                htmlid: this.parentId,
+                                showCancelButton: "true",
+                                destination: file.nodeRef
                             });
 
                     addOptions(dlg, file);
@@ -76,12 +76,12 @@
                     method: Alfresco.util.Ajax.POST,
                     onSuccess: {
                         fn: function success(response) {
-                            Alfresco.util.PopupManager.displayMessage("message.email-documents.success");
+                            Alfresco.util.PopupManager.displayMessage({text: this.msg("message.email-documents.success")});
                         }
                     },
                     onFailure: {
                         fn: function fail(response) {
-                            Alfresco.util.PopupManager.displayMessage("message.email-documents.failure");
+                            Alfresco.util.PopupManager.displayMessage({text: this.msg("message.email-documents.failure")});
                         }
                     },
                     onTemplateLoaded: {
@@ -105,11 +105,14 @@
                                     var convert = dialog.id + "_prop_convert-entry";
                                     YAHOO.util.Dom.get(convert).checked = true;
                                 }
+                                Alfresco.util.populateHTML([dialog.id + "-form-submit-button", this.msg("message.email-documents.button.send")],
+                                        [dialog.id + "-form-cancel-button", this.msg("message.email-documents.button.cancel")]);
+
                             } catch (ex) {
                                 console.log("error retrieving email template..." + ex.message);
                             }
                         }
-                    },
+                    }
                 });
     }
 })();
