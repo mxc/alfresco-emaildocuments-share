@@ -8,5 +8,22 @@
                 <value>alfresco.module.shareemaildocuments.messages.language</value>
             </list>
         </property>
-    </bean>     
+    </bean>  
+       
+   <bean id="evaluator.doclib.action.emailable" class="org.alfresco.web.evaluator.HasAspectEvaluator">
+      <property name="aspects">
+         <list>
+            <value>jb:emailable</value>
+         </list>
+      </property>
+   </bean>    
+   
+   <bean id="evaluator.doclib.action.emailableWithHistory" class="org.alfresco.web.evaluator.HasAspectEvaluator">
+      <property name="aspects">
+         <list>
+            <value>jb:emailableWithHistory</value>
+         </list>
+      </property>
+   </bean>       
+            
 </beans>

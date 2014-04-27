@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>za.co.jumpingbean.alfresco</groupId>
     <artifactId>ShareEmailDocuments</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Share Email Documents AMP</name>
     <packaging>amp</packaging>
     <description>Jumping Bean Alfresco Email Module</description>

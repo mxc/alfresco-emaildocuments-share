@@ -99,11 +99,18 @@
                                     YAHOO.util.Dom.get(subject).value = node.jsNode.properties["jb:subject"];
                                     var body = dialog.id + "_prop_body";
                                     YAHOO.util.Dom.get(body).value = node.jsNode.properties["jb:body"];
-                                    var convert = dialog.id + "_prop_convert-entry";
-                                    YAHOO.util.Dom.get(convert).checked = node.jsNode.properties["jb:convert"];
+                                    
+                                    var convert_box = dialog.id + "_prop_convert-entry";
+                                    YAHOO.util.Dom.get(convert_box).checked = node.jsNode.properties["jb:convert"];
+
+                                    var convert = dialog.id + "_prop_convert";
+                                    YAHOO.util.Dom.get(convert).value = node.jsNode.properties["jb:convert"];
+                                    
                                 } else {
-                                    var convert = dialog.id + "_prop_convert-entry";
-                                    YAHOO.util.Dom.get(convert).checked = true;
+                                    var convert_box = dialog.id + "_prop_convert-entry";
+                                    YAHOO.util.Dom.get(convert_box).checked = true;
+                                    var convert = dialog.id + "_prop_convert";
+                                    YAHOO.util.Dom.get(convert).value = true;                                    
                                 }
                                 var formElm = YAHOO.util.Dom.get(dialog.id + "-form-fields");
                                 var formFields = formElm.children[0];
