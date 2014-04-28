@@ -1,0 +1,251 @@
+<extension>
+    <modules>
+        <module>
+            <id>Email Documents</id>
+            <description>Apply to all document libraries</description>
+            <auto-deploy>true</auto-deploy> 
+
+            <customizations>
+                <customization>
+                    <targetPackageRoot>org.alfresco</targetPackageRoot>
+                    <sourcePackageRoot></sourcePackageRoot>
+                    <dependencies>
+                        <js>components/documentlibrary/actions/email-documents.js</js>
+                    </dependencies>
+                </customization>
+            </customizations>
+
+            <configurations>
+                <config evaluator="string-compare" condition="emailDocumentsAction">
+                     <forms>
+                        <form>
+                            <field-visibility>
+                                <show id="to"/>
+                                <show id="from" />
+                                <show id="subject"/>
+                                <show id="body"/>
+                                <show id="convert"/>
+                            </field-visibility>
+                            <appearance>
+                                <field id="to" label-id="jb_to"/>
+                                <field id="from" label-id="jb_from"/>
+                                <field id="subject" label-id="jb_subject"/>
+                                <field id="body" label-id="jb_body">
+                                    <control
+                                        template="/org/alfresco/components/form/controls/textarea.ftl" />
+                                </field>
+                                <field id="convert" label-id="jb_convert">
+                                    <control
+                                        template="/org/alfresco/components/form/controls/checkbox.ftl" />
+                                </field>
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                
+                <config evaluator="string-compare" condition="emailDocumentsWithHistoryAction">
+                     <forms>
+                        <form>
+                            <field-visibility>
+                                <show id="to"/>
+                                <show id="from" />
+                                <show id="subject"/>
+                                <show id="body"/>
+                                <show id="convert"/>
+                                <show id="site"/>
+                            </field-visibility>
+                            <appearance>
+                                <field id="to" label-id="jb_to"/>
+                                <field id="from" label-id="jb_from"/>
+                                <field id="subject" label-id="jb_subject"/>
+                                <field id="body" label-id="jb_body">
+                                    <control
+                                        template="/org/alfresco/components/form/controls/textarea.ftl" />
+                                </field>
+                                <field id="convert" label-id="jb_convert">
+                                    <control
+                                        template="/org/alfresco/components/form/controls/checkbox.ftl" />
+                                </field>
+                                <field id="site">
+                                    <control 
+                                        template="/org/alfresco/components/form/controls/hidden.ftl">
+                                        <control-param name="contextProperty">site</control-param>
+                                    </control>
+                                </field>
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+
+                <!-- Custom DocLibActions config section -->
+                <config evaluator="string-compare" condition="DocLibActions">
+                    <actions>
+                        <action id="email-documents-history" type="javascript" label="actions.email-documents-history" icon="jumpingbean">
+                            <param name="function">onActionSendDocumentsViaEmailWithHistory</param>
+                            <param name="itemKind">action</param>
+                            <param name="itemId">emailDocumentsWithHistoryAction</param>
+                            <param name="destination">{node.nodeRef}</param>
+                            <param name="mode">create</param>
+                            <param name="successMessage">message.email-documents.success</param>
+                            <param name="failureMessage">message.email-documents.failure</param>
+                            <evaluator>evaluator.doclib.action.emailableWithHistory</evaluator>
+                        </action>
+                        <action id="email-documents" type="javascript" label="actions.email-documents" icon="jumpingbean">
+                            <param name="function">onActionSendDocumentsViaEmail</param>
+                            <param name="itemKind">action</param>
+                            <param name="itemId">emailDocumentsAction</param>
+                            <param name="destination">{node.nodeRef}</param>
+                            <param name="mode">create</param>
+                            <param name="successMessage">message.email-documents.success</param>
+                            <param name="failureMessage">message.email-documents.failure</param>
+                            <evaluator>evaluator.doclib.action.emailable</evaluator>
+                        </action>
+                    </actions>
+                    <actionGroups>
+                        <actionGroup id="document-browse">
+                            <action index="300" id="email-documents" />
+                            <action index="300" id="email-documents-history" />
+                        </actionGroup>
+                        <actionGroup id="document-details">
+                            <action index="300" id="email-documents" />
+                            <action index="300" id="email-documents-history" />
+                        </actionGroup>
+                        <actionGroup id="folder-browse">
+                            <action index="300" id="email-documents" />
+                            <action index="300" id="email-documents-history" />
+                        </actionGroup>
+                        <actionGroup id="folder-details">
+                            <action index="300" id="email-documents" />
+                            <action index="300" id="email-documents-history" />
+                        </actionGroup>
+                    </actionGroups>
+                </config> 
+    
+                <config evaluator="string-compare" condition="DocumentLibrary" replace="false">
+                    <aspects>
+                        <visible>
+                            <aspect name="jb:emailTemplate" />
+                            <aspect name="jb:emailable" />
+                            <aspect name="jb:emailableWithHistory" />
+                            <aspect name="cm:generalclassifiable" />
+                            <aspect name="cm:complianceable" />
+                            <aspect name="cm:dublincore" />
+                            <aspect name="cm:effectivity" />
+                            <aspect name="cm:summarizable" />
+                            <aspect name="cm:versionable" />
+                            <aspect name="cm:templatable" />
+                            <aspect name="cm:emailed" />
+                            <aspect name="emailserver:aliasable" />
+                            <aspect name="cm:taggable" />
+                            <aspect name="app:inlineeditable" />
+                            <aspect name="gd:googleEditable" />
+                            <aspect name="cm:geographic" />
+                            <aspect name="exif:exif" />
+                            <aspect name="audio:audio" />
+                            <aspect name="cm:indexControl" />
+                            <aspect name="dp:restrictable" />
+                        </visible>
+                        <addable>
+                        </addable>
+                        <removeable>
+                        </removeable>
+                    </aspects>                
+                </config>
+                
+                <config evaluator="aspect" condition="jb:emailTemplate">
+                    <forms>
+                        <form>
+                            <field-visibility>
+                                <show id="jb:from" />
+                                <show id="jb:to" />
+                                <show id="jb:subject" />
+                                <show id="jb:body" />
+                                <show id="jb:convert" />
+                            </field-visibility>
+                            <appearance>
+                                <field id="jb:body">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl" />
+                                </field>
+                                <field id="convert" label-id="email-documents.field.convert">
+                                    <control
+                                        template="/org/alfresco/components/form/controls/checkbox.ftl" />
+                                </field>                                
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+                
+                <config evaluator="model-type" condition="jb:emailHistoryListItem">
+                    <forms>
+                        <form>
+                            <field-visibility>
+                                <show id="jb:from" />				
+                                <show id="jb:to" />				
+                                <show id="jb:subject" />
+                                <show id="jb:dateSent" />
+                                <show id="jb:sender" />
+                                <show id="jb:attachments" />                                
+                                <show id="jb:body" />
+                            </field-visibility>
+                            <create-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+                            <appearance>
+                                <show id="jb:sender" />
+                                <field id="jb:attachments">
+                                    <control>
+                                        <control-param name="startLocation">{doclib}</control-param>
+                                    </control>
+                                </field>
+                                <field id="jb:body">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl" />
+                                </field>
+                            </appearance>
+                        </form>
+                        <form id="datagrid">
+                            <field-visibility>
+                                <show id="jb:from" />				
+                                <show id="jb:to" />				
+                                <show id="jb:subject" />
+                                <show id="jb:dateSent" />
+                                <show id="jb:sender" />
+                                <show id="jb:attachments" />
+                                <show id="jb:body" />
+                            </field-visibility>
+                            <appearance>
+                                <field id="jb:body">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl" />
+                                </field>
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>                
+
+                <config evaluator="node-type" condition="jb:emailHistoryListItem">
+                    <forms>
+                        <form>
+                            <field-visibility>
+                                <show id="jb:from" />				
+                                <show id="jb:to" />				
+                                <show id="jb:subject" />
+                                <show id="jb:dateSent" />
+                                <show id="jb:sender" />
+                                <show id="jb:attachments" />                                
+                                <show id="jb:body" />
+                            </field-visibility>
+                            <create-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
+                            <appearance>
+                                <field id="jb:attachments">
+                                    <control>
+                                        <control-param name="startLocation">{doclib}</control-param>
+                                    </control>
+                                </field>
+                                <field id="jb:body">
+                                    <control template="/org/alfresco/components/form/controls/textarea.ftl" />
+                                </field>
+                            </appearance>
+                        </form>
+                    </forms>
+                </config>
+            </configurations>
+        </module>
+    </modules>
+</extension> 

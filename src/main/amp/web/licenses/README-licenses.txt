@@ -1,0 +1,1 @@
+Released under GPL V3 - https://www.gnu.org/licenses/gpl.html

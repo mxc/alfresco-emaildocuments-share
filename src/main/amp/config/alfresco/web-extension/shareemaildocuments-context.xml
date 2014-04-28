@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+
+<beans>
+       <bean id="emaildocuments_resources" class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
+        <property name="resourceBundles">
+            <list>
+                <value>alfresco.module.shareemaildocuments.messages.language</value>
+            </list>
+        </property>
+    </bean>  
+       
+   <bean id="evaluator.doclib.action.emailable" class="org.alfresco.web.evaluator.HasAspectEvaluator">
+      <property name="aspects">
+         <list>
+            <value>jb:emailable</value>
+         </list>
+      </property>
+   </bean>    
+   
+   <bean id="evaluator.doclib.action.emailableWithHistory" class="org.alfresco.web.evaluator.HasAspectEvaluator">
+      <property name="aspects">
+         <list>
+            <value>jb:emailableWithHistory</value>
+         </list>
+      </property>
+   </bean>       
+            
+</beans>
