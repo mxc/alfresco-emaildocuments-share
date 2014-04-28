@@ -43,7 +43,11 @@ You need to deploy both the repo and share amp. The repository project is
 RepoEmailDocuments.amp and the share is ShareEmailDocuments.amp. See the Repo
 modules readme.txt for how to compile and deploy.
 
-Once install the share module should be auto-deployed. If the steps below result
+Repository module source can be found at:
+
+    https://github.com/mxc/alfresco-emaildocuments-repo
+
+Once installed the share module should be auto-deployed. If the steps below result
 in menus that are missing the menu items documented please go to
 
     http://path/to/share:[8080]/share/page/modules/deploy
@@ -74,7 +78,7 @@ added data lists to your site you can add it to view the history of the document
 Detailed How To
 -----------------
 
-Once deployed you follow the steps below to use the new action.
+Once deployed follow the steps below to use the new action.
 
 1) Select a folder while browsing a sites document library. Click the more
    menu item from the menu that appears on the right hand side of the library
