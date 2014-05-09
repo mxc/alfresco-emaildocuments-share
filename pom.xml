@@ -31,6 +31,19 @@
        | but you can override the properties below to use another version. 
        | For more available properties see the alfresco-sdk-parent POM. 
        -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <properties>
         <!-- Defines the alfresco edition to compile against. Allowed values are [org.alfresco|org.alfresco.enterprise]--> 
         <alfresco.groupId>org.alfresco</alfresco.groupId>
