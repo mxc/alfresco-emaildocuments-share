@@ -94,11 +94,13 @@
                             try {
                                 if (node.jsNode.hasAspect("jb:emailTemplate")) {
                                     var from = dialog.id + "_prop_from";
-                                    YAHOO.util.Dom.get(from).value = node.jsNode.properties["jb:from"];
+                                    YAHOO.util.Dom.get(from).value = node.jsNode.properties["jb:from"]?node.jsNode.properties["jb:from"]:"";
                                     var subject = dialog.id + "_prop_subject";
-                                    YAHOO.util.Dom.get(subject).value = node.jsNode.properties["jb:subject"];
+                                    YAHOO.util.Dom.get(subject).value = node.jsNode.properties["jb:subject"]?node.jsNode.properties["jb:subject"]:"";
+                                    var bcc = dialog.id + "_prop_bcc";
+                                    YAHOO.util.Dom.get(bcc).value = node.jsNode.properties["jb:bcc"]?node.jsNode.properties["jb:bcc"]:"";
                                     var body = dialog.id + "_prop_body";
-                                    YAHOO.util.Dom.get(body).value = node.jsNode.properties["jb:body"];
+                                    YAHOO.util.Dom.get(body).value = node.jsNode.properties["jb:body"]?node.jsNode.properties["jb:body"]:"";
                                     
                                     var convert_box = dialog.id + "_prop_convert-entry";
                                     YAHOO.util.Dom.get(convert_box).checked = node.jsNode.properties["jb:convert"];
@@ -110,7 +112,11 @@
                                     var convert_box = dialog.id + "_prop_convert-entry";
                                     YAHOO.util.Dom.get(convert_box).checked = true;
                                     var convert = dialog.id + "_prop_convert";
-                                    YAHOO.util.Dom.get(convert).value = true;                                    
+                                    YAHOO.util.Dom.get(convert).value = true;
+                                    //var from = dialog.id + "_prop_from";
+                                    //YAHOO.util.Dom.get(from).value =user.email;
+                                    //var bcc = dialog.id + "_prop_bcc";
+                                    //YAHOO.util.Dom.get(bcc).value =user.email;
                                 }
                                 var formElm = YAHOO.util.Dom.get(dialog.id + "-form-fields");
                                 var formFields = formElm.children[0];

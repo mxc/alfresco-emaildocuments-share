@@ -21,6 +21,7 @@
                         <form>
                             <field-visibility>
                                 <show id="to"/>
+                                <show id="bcc" />
                                 <show id="from" />
                                 <show id="subject"/>
                                 <show id="body"/>
@@ -28,6 +29,7 @@
                             </field-visibility>
                             <appearance>
                                 <field id="to" label-id="jb_to"/>
+                                <field id="bcc" label-id="jb_bcc"/>
                                 <field id="from" label-id="jb_from"/>
                                 <field id="subject" label-id="jb_subject"/>
                                 <field id="body" label-id="jb_body">
@@ -48,6 +50,7 @@
                         <form>
                             <field-visibility>
                                 <show id="to"/>
+                                <show id="bcc" />                                
                                 <show id="from" />
                                 <show id="subject"/>
                                 <show id="body"/>
@@ -56,6 +59,7 @@
                             </field-visibility>
                             <appearance>
                                 <field id="to" label-id="jb_to"/>
+                                <field id="bcc" label-id="jb_bcc"/>                                
                                 <field id="from" label-id="jb_from"/>
                                 <field id="subject" label-id="jb_subject"/>
                                 <field id="body" label-id="jb_body">
@@ -158,6 +162,7 @@
                             <field-visibility>
                                 <show id="jb:from" />
                                 <show id="jb:to" />
+                                <show id="jb:bcc" />
                                 <show id="jb:subject" />
                                 <show id="jb:body" />
                                 <show id="jb:convert" />
@@ -181,6 +186,7 @@
                             <field-visibility>
                                 <show id="jb:from" />				
                                 <show id="jb:to" />				
+                                <show id="jb:bcc" />				
                                 <show id="jb:subject" />
                                 <show id="jb:dateSent" />
                                 <show id="jb:sender" />
@@ -203,7 +209,8 @@
                         <form id="datagrid">
                             <field-visibility>
                                 <show id="jb:from" />				
-                                <show id="jb:to" />				
+                                <show id="jb:to" />
+                                <show id="jb:bcc" />				
                                 <show id="jb:subject" />
                                 <show id="jb:dateSent" />
                                 <show id="jb:sender" />
@@ -224,7 +231,8 @@
                         <form>
                             <field-visibility>
                                 <show id="jb:from" />				
-                                <show id="jb:to" />				
+                                <show id="jb:to" />
+                                <show id="jb:bcc" />				
                                 <show id="jb:subject" />
                                 <show id="jb:dateSent" />
                                 <show id="jb:sender" />
