@@ -29,7 +29,7 @@
                             </field-visibility>
                             <appearance>
                                 <field id="to" label-id="jb_to"/>
-                                <field id="bcc" label-id="jb_bcc"/>
+                                <field id="bcc" label-id="jb_bcc" mandatory="false" />
                                 <field id="from" label-id="jb_from"/>
                                 <field id="subject" label-id="jb_subject"/>
                                 <field id="body" label-id="jb_body">
@@ -59,7 +59,7 @@
                             </field-visibility>
                             <appearance>
                                 <field id="to" label-id="jb_to"/>
-                                <field id="bcc" label-id="jb_bcc"/>                                
+                                <field id="bcc" label-id="jb_bcc" mandatory="false" />                                
                                 <field id="from" label-id="jb_from"/>
                                 <field id="subject" label-id="jb_subject"/>
                                 <field id="body" label-id="jb_body">
@@ -168,6 +168,7 @@
                                 <show id="jb:convert" />
                             </field-visibility>
                             <appearance>
+                                <field id="jb:bcc" mandatory="false" />
                                 <field id="jb:body">
                                     <control template="/org/alfresco/components/form/controls/textarea.ftl" />
                                 </field>
@@ -241,6 +242,7 @@
                             </field-visibility>
                             <create-form template="/org/alfresco/components/data-lists/forms/dataitem.ftl" />
                             <appearance>
+                                <field id="jb:bcc" mandatory="false" />
                                 <field id="jb:attachments">
                                     <control>
                                         <control-param name="startLocation">{doclib}</control-param>
